@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="author" content="Group 3">
+  <meta name="keywords" content="HTML, CSS, JavaScript">
+  <meta name="revised" content="01-22-25">
+  <title>Equation X Explosion Quiz</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <nav style="position: absolute; top: 20px; right: 40px;">
+      <a href="index.html">Home</a>
+    </nav>
+  </header>
+
+  <div class="container">
+    <div class="box">
+      <h2 id="quiz-title">Loading Quiz...</h2>
+      <div id="question-container">
+        <!-- Questions will appear here -->
+      </div>
+      <div id="answer-buttons">
+        <!-- Answer options will be here -->
+      </div>
+      <div id="quiz-controls">
+        <button id="next-question" onclick="nextQuestion()">Next Question</button>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    ©group3
+  </footer>
+
+  <script src="quiz.js"></script>
+</body>
+</html>

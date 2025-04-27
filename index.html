@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="author" content="Group 3">
+  <meta name="keywords" content="HTML, CSS, JavaScript">
+  <meta name="revised" content="01-22-25">
+  <title>Equation X Explosion</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    body {
+      background: url('landing.jpg') no-repeat center center fixed;
+      background-size: cover;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <nav style="position: absolute; top: 20px; right: 40px;">
+      <a href="#">Home</a>
+      <a href="#">How To Play</a>
+      <a href="#">Contact</a>
+    </nav>
+  </header>
+
+  <div id="highscore-board">
+    <h2>HI SCORE</h2>
+    <ol id="score-list">
+      <li>Loading...</li>
+    </ol>
+  </div>
+
+  <div class="container">
+    <form class="box" onsubmit="saveInfoAndStart(event)">
+      <h2 id="title" style="font-family: 'Dancing Script', cursive;">Start Your Quiz</h2>
+      <div class="form-group">
+        <label for="name">Your Name:</label>
+        <input type="text" id="name" required />
+      </div>
+
+      <div class="form-group">
+        <label>Select Difficulty:</label>
+        <div class="button-group" id="difficulty-group">
+          <input type="button" value="Easy" onclick="chooseDifficulty('easy', this)" />
+          <input type="button" value="Medium" onclick="chooseDifficulty('medium', this)" />
+          <input type="button" value="Hard" onclick="chooseDifficulty('hard', this)" />
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>Select Topic:</label>
+        <div class="button-group" id="topic-group">
+          <input type="button" value="Algebra" onclick="chooseTopic('Algebra', this)" />
+          <input type="button" value="Geometry" onclick="chooseTopic('Geometry', this)" />
+          <input type="button" value="Statistics" onclick="chooseTopic('Statistics', this)" />
+          <input type="button" value="Theory" onclick="chooseTopic('Theory', this)" />
+          <input type="button" value="Trigonometry" onclick="chooseTopic('Trigonometry', this)" />
+        </div>
+      </div>
+
+      <div class="form-group play-button">
+        <input type="submit" value="Play" />
+      </div>
+    </form>
+  </div>
+
+  <footer>
+    ©group3
+  </footer>
+  <script src="script.js"></script>
+  <script>
+    var selectedDifficulty = "";
+    var selectedTopic = "";
+
+    var nameInput = document.getElementById("name");
+    var title = document.getElementById("title");
+
+    nameInput.addEventListener("input", function () {
+      var typedName = nameInput.value;
+      if (typedName.length > 0) {
+        title.textContent = "Start your quiz, " + typedName + "!";
+      } else {
+        title.textContent = "Start Your Quiz";
+      }
+    });
+
+    function chooseDifficulty(difficulty, element) {
+      selectedDifficulty = difficulty;
+      var allButtons = document.getElementById("difficulty-group").children;
+      for (var i = 0; i < allButtons.length; i++) {
+        allButtons[i].classList.remove("active");
+      }
+      element.classList.add("active");
+    }
+
+    function chooseTopic(topic, element) {
+      selectedTopic = topic;
+      var allButtons = document.getElementById("topic-group").children;
+      for (var i = 0; i < allButtons.length; i++) {
+        allButtons[i].classList.remove("active");
+      }
+      element.classList.add("active");
+    }
+
+    function saveInfoAndStart(event) {
+      event.preventDefault();
+      var name = nameInput.value;
+      if (selectedDifficulty === "" || selectedTopic === "") {
+        alert("Please select both difficulty and topic.");
+        return;
+      }
+
+      document.cookie = "username=" + encodeURIComponent(name) + "; path=/";
+      document.cookie = "difficulty=" + selectedDifficulty + "; path=/";
+      document.cookie = "topic=" + selectedTopic + "; path=/";
+
+      alert("You can now proceed to your chosen quiz. Good luck, " + name + "!.");
+      
+      window.location.href = "quiz.html";
+    }
+  </script>
+</body>
+</html>
